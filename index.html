@@ -42,12 +42,12 @@
           <a href="https://github.com/brustulim/p2pwire">
             click here to view the p2pWire project on github</a
           >
-        </h2>
+        </h4>
       </div>
       <div class="well">
         <div class="row">
           <div class="column">
-            <div align="center"> Your direct connections</div>
+            <div align="center">Your direct connections</div>
             <div class="myAddress"></div>
             <div class="torrent-graph1"></div>
           </div>
@@ -72,12 +72,12 @@
       var mapLinks = []
       var myAddress = ''
 
-      var p2pwire = new P2PWire({ debugMode: true })
+      var p2pwire = new P2PWire({ consoleLogLevel: 'info' })
 
       let graph1 = new window.P2PGraph('.torrent-graph1')
       let graph = new window.P2PGraph('.torrent-graph')
 
-      p2pwire.on('created', nodeAddress => {
+      p2pwire.on('ready', nodeAddress => {
         document.querySelector('.myAddress').innerHTML =
           '<h3>My address: <h2>' + nodeAddress + '</h2></h3>'
         myAddress = nodeAddress

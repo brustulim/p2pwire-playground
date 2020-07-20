@@ -10,6 +10,21 @@ It can be used in node js applications and other js based frameworks/platforms t
 
 click here to access the [p2pWire project on Github](https://github.com/brustulim/p2pwire)
 
+## How to execute:
+
+#### node js console application:
+
+```bash
+npm install
+node index.js
+```
+
+#### browser:
+
+Just open the "index.js in your browser"
+
 ## Running example
 
 Click here to view this repository code running : [https://brustulim.github.io/p2pwire-playground](https://brustulim.github.io/p2pwire-playground/)
+
+> Try to open two or more tabs, browsers or open in your smartphone to view its connecting.

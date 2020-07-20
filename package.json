@@ -10,7 +10,7 @@
   "author": "Herminio Brustulim <brustulim@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "p2pwire": "^0.1.18",
-    "wrtc": "^0.4.5"
+    "p2pwire": "^0.1.21",
+    "wrtc": "^0.4.6"
   }
 }
