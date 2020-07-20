@@ -30,7 +30,7 @@
   </head>
 
   <body>
-    <script src="https://cdn.jsdelivr.net/npm/p2pwire@0.1.21/p2pwire.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p2pwire@0.1.22/p2pwire.min.js"></script>
     <script src="p2p-graph.min.js"></script>
 
     <div class="container">
@@ -81,7 +81,7 @@
       let graph1 = new window.P2PGraph('.torrent-graph1')
       let graph = new window.P2PGraph('.torrent-graph')
 
-      p2pwire.on('ready', nodeAddress => {
+      p2pwire.on('created', nodeAddress => {
         document.querySelector('.myAddress').innerHTML =
           '<h3>My address: <h2>' + nodeAddress + '</h2></h3>'
         myAddress = nodeAddress

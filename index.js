@@ -16,8 +16,8 @@ function startNetwork () {
     consoleLogLevel: 'info'
   })
 
-  p2pwire.on('ready', nodeAddress => {
-    console.log(`Ready - my nodeAddress: `, nodeAddress)
+  p2pwire.on('created', nodeAddress => {
+    console.log(`Created - my nodeAddress: `, nodeAddress)
   })
 
   p2pwire.on('nodeConnected', (nodeAddress, nodeData) => {
