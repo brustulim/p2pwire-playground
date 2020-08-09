@@ -30,8 +30,10 @@
   </head>
 
   <body>
-    <script src="https://cdn.jsdelivr.net/npm/p2pwire@0.1.23/p2pwire.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p2pwire@0.1.24/p2pwire.min.js"></script>
+    <!-- <script src="../p2pwire/p2pwire.min.js"></script> -->
     <script src="p2p-graph.min.js"></script>
+    <script src="./util/mesh2graph.js"></script>
 
     <div class="container">
       <h2>Welcome to the p2pWire network</h2>
@@ -76,10 +78,12 @@
       var mapLinks = []
       var myAddress = ''
 
-      var p2pwire = new P2PWire({ consoleLogLevel: 'info' })
+      var p2pwire = new P2PWire({ consoleLogLevel: 'error' })
 
       let graph1 = new window.P2PGraph('.torrent-graph1')
       let graph = new window.P2PGraph('.torrent-graph')
+
+      let mesh2graph = new Mesh2Graph(p2pwire, graph)
 
       p2pwire.on('created', nodeAddress => {
         document.querySelector('.myAddress').innerHTML =
@@ -104,6 +108,7 @@
         })
         graph1.connect('You', nodeAddress)
       })
+
       p2pwire.on('nodeDisconnected', nodeAddress => {
         // nodes = arrayRemove(nodes, nodeAddress);
         nodes.delete(nodeAddress)
@@ -113,44 +118,7 @@
         graph1.remove(nodeAddress)
       })
 
-      p2pwire.on('linksUpdate', links => {
-        // Add new Nodes
-        const flatPeers = links.flat()
-        flatPeers.map(it => {
-          if (!graph.hasPeer(it)) {
-            graph.add({
-              id: it,
-              me: it === myAddress,
-              name: it
-            })
-          }
-        })
-
-        // remove disconnected links
-        mapLinks.map(it => {
-          if (!links.find(l => l.toString() === it.toString())) {
-            console.log('links não tem:', { it, links })
-            graph.disconnect(it[0], it[1])
-            var index = mapLinks.indexOf(it)
-            mapLinks.splice(index, 1)
-          }
-        })
-
-        // add new links
-        links.map(it => {
-          if (!mapLinks.find(l => l.toString() === it.toString())) {
-            graph.connect(it[0], it[1])
-            mapLinks.push(it)
-          }
-        })
-      })
-
       p2pwire.on('receiveMessage', (remoteNodeAddress, message) => {
-        graph.seed(remoteNodeAddress, true)
-        setTimeout(() => {
-          graph.seed(remoteNodeAddress, false)
-        }, 3000)
-
         log(
           'message from - <B>' +
             remoteNodeAddress +
@@ -167,7 +135,6 @@
 
       function showNodes (nodesMap) {
         const nodes = Array.from(nodesMap)
-        console.log(`showNodes -> nodes`, nodes)
 
         var tableRows = ''
 

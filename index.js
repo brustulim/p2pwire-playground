@@ -2,7 +2,7 @@ const wrtc = require('wrtc')
 // use from npm
 const P2PWire = require('p2pwire')
 // use from source code
-// const P2PWire = require("../p2pwire/index.js")
+// const P2PWire = require('../p2pwire/index.js')
 
 try {
   startNetwork()
@@ -43,9 +43,7 @@ function startNetwork () {
   })
 
   p2pwire.on('linksUpdate', links => {
-    console.log(`Links update received: `, {
-      links
-    })
+    console.log(`Links update received: `, links)
   })
 
   p2pwire.on('receiveMessage', (remoteNodeAddress, message) => {
